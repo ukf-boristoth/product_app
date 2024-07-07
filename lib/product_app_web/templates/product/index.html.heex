@@ -1,0 +1,23 @@
+# lib/product_app_web/templates/product/index.html.heex
+
+<%= form_for @conn, Routes.product_path(@conn, :index), [method: :get], fn f -> %>
+  <div>
+    <%= label f, :title, "Search by title:" %>
+    <%= text_input f, :title, placeholder: "Enter product title" %>
+    <%= submit "Filter" %>
+  </div>
+<% end %>
+
+<div>
+  <h2>Products</h2>
+  <%= for product <- @products do %>
+    <div>
+      <img src="<%= product.photo_url %>" alt="<%= product.title %>" width="150">
+      <h3><%= product.title %></h3>
+      <p><%= product.description %></p>
+      <p>Category: <%= product.category %></p>
+      <p>Price: <%= product.price %></p>
+      <p>Stock: <%= product.stock %></p>
+    </div>
+  <% end %>
+</div>
